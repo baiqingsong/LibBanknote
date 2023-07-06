@@ -1,0 +1,3 @@
+rootProject.name = "LibBanknote"
+include ':app'
+include ':banknote'
