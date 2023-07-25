@@ -18,7 +18,7 @@ import com.dawn.serial.LSerialUtil;
 /**
  * 纸钞机服务
  */
-class BanknoteService extends Service {
+public class BanknoteService extends Service {
     private LSerialUtil banknoteSerialUtil;
     private enum command {init, getProtocol, getConfigure, setConfigure, enable, disable, status};//初始化，获取协议，获取配置，设置配置，使能，禁能，状态
     private command currentCommand;
@@ -100,7 +100,7 @@ class BanknoteService extends Service {
      * 纸钞机串口连接
      */
     private void startPort(){
-        banknoteSerialUtil = new LSerialUtil(1, 9600, 8, 2, 'N', LSerialUtil.SerialType.TYPE_HEX, new LSerialUtil.OnSerialListener() {
+        banknoteSerialUtil = new LSerialUtil(BanknoteConstant.BANKNOTE_SERIAL, 9600, 8, 2, 'N', LSerialUtil.SerialType.TYPE_HEX, new LSerialUtil.OnSerialListener() {
             @Override
             public void startError() {
                 Log.e("dawn", "异常：纸钞机串口启动错误");

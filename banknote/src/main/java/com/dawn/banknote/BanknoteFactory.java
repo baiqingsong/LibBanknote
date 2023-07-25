@@ -35,7 +35,8 @@ public class BanknoteFactory {
     /**
      * 开启服务
      */
-    public void startService(){
+    public void startService(int serial){
+        BanknoteConstant.BANKNOTE_SERIAL = serial;
         Intent banknoteIntent = new Intent(mContext, BanknoteService.class);
         mContext.startService(banknoteIntent);
     }
