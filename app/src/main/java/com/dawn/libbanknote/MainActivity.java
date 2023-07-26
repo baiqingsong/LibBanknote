@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 //        Intent banknoteIntent = new Intent(this, BanknoteService.class);
 //        startService(banknoteIntent);
-        BanknoteFactory.getInstance(this).startService(1);
+        BanknoteFactory.getInstance(this).startService(4);
         BanknoteFactory.getInstance(this).setListener(new OnBanknoteListener() {
             @Override
             public void onReceiverMoney(int money) {
