@@ -3,5 +3,6 @@
     package="com.dawn.banknote">
     <application>
         <service android:name=".BanknoteService"/>
+        <service android:name=".ict.BanknoteIctService"/>
     </application>
 </manifest>

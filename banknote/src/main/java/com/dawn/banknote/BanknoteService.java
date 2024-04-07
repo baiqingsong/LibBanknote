@@ -100,7 +100,7 @@ public class BanknoteService extends Service {
      * 纸钞机串口连接
      */
     private void startPort(){
-        banknoteSerialUtil = new LSerialUtil(BanknoteConstant.BANKNOTE_SERIAL, 9600, 8, 2, 'N', LSerialUtil.SerialType.TYPE_HEX, new LSerialUtil.OnSerialListener() {
+        banknoteSerialUtil = new LSerialUtil(LSerialUtil.SerialNameType.TYPE_TTYS_WK, BanknoteConstant.BANKNOTE_SERIAL, 9600, 8, 2, 'N', LSerialUtil.SerialType.TYPE_HEX, new LSerialUtil.OnSerialListener() {
             @Override
             public void startError() {
                 Log.e("dawn", "异常：纸钞机串口启动错误");
@@ -118,7 +118,7 @@ public class BanknoteService extends Service {
 
             @Override
             public void getReceiverStr(String str) {
-//                LLog.i("纸钞机串口接收数据：" + str);
+                Log.i("dawn", "纸钞机串口接收数据：" + str);
                 resoluteBanknoteReceiverStr(str);
             }
         });

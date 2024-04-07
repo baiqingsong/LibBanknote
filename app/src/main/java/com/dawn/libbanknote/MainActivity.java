@@ -10,6 +10,8 @@ import android.view.View;
 import com.dawn.banknote.BanknoteFactory;
 import com.dawn.banknote.BanknoteService;
 import com.dawn.banknote.OnBanknoteListener;
+import com.dawn.banknote.ict.BanknoteIctFactory;
+import com.dawn.banknote.ict.OnBanknoteIctListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,11 +21,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 //        Intent banknoteIntent = new Intent(this, BanknoteService.class);
 //        startService(banknoteIntent);
-        BanknoteFactory.getInstance(this).startService(4);
-        BanknoteFactory.getInstance(this).setListener(new OnBanknoteListener() {
+//        BanknoteFactory.getInstance(this).startService(0);
+//        BanknoteFactory.getInstance(this).setListener(new OnBanknoteListener() {
+//            @Override
+//            public void onReceiverMoney(int money) {
+//                Log.e("dawn", "接收金额：" + money);
+//            }
+//        });
+
+        BanknoteIctFactory.getInstance(this).startService(0);
+        BanknoteIctFactory.getInstance(this).setListener(new OnBanknoteIctListener() {
             @Override
-            public void onReceiverMoney(int money) {
-                Log.e("dawn", "接收金额：" + money);
+            public void onReceiverMoney(int moneyIndex) {
+                Log.e("dawn", "接收金额：" + moneyIndex);
             }
         });
 
