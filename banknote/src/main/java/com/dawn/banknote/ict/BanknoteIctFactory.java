@@ -48,7 +48,7 @@ public class BanknoteIctFactory {
      * 开始纸币接收
      */
     public void startMoneyReceiver(){
-        Intent intent = new Intent(BanknoteConstant.RECEIVER_BANKNOTE);
+        Intent intent = new Intent(BanknoteConstant.RECEIVER_BANKNOTE_ICT);
         intent.putExtra("command", "start_money_receiver");
         mContext.sendBroadcast(intent);
     }
@@ -57,7 +57,7 @@ public class BanknoteIctFactory {
      * 停止纸币接收
      */
     public void stopMoneyReceiver(){
-        Intent intent = new Intent(BanknoteConstant.RECEIVER_BANKNOTE);
+        Intent intent = new Intent(BanknoteConstant.RECEIVER_BANKNOTE_ICT);
         intent.putExtra("command", "stop_money_receiver");
         mContext.sendBroadcast(intent);
     }

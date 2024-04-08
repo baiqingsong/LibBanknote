@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        BanknoteIctFactory.getInstance(this).startService(0);
+        BanknoteIctFactory.getInstance(this).startService(4);
         BanknoteIctFactory.getInstance(this).setListener(new OnBanknoteIctListener() {
             @Override
             public void onReceiverMoney(int moneyIndex) {
@@ -46,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startReceiver(View view){
-        BanknoteFactory.getInstance(this).startMoneyReceiver();
+        BanknoteIctFactory.getInstance(this).startMoneyReceiver();
     }
 
     public void stopReceiver(View view){
-        BanknoteFactory.getInstance(this).stopMoneyReceiver();
+        BanknoteIctFactory.getInstance(this).stopMoneyReceiver();
     }
 }

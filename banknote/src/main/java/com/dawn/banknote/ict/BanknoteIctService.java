@@ -32,7 +32,7 @@ public class BanknoteIctService extends Service {
     private void registerReceiver() {
         mReceiver = new BanknoteReceiverIct();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(BanknoteConstant.RECEIVER_BANKNOTE);
+        intentFilter.addAction(BanknoteConstant.RECEIVER_BANKNOTE_ICT);
         registerReceiver(mReceiver, intentFilter);
     }
 
@@ -58,7 +58,7 @@ public class BanknoteIctService extends Service {
      * 纸钞机串口连接
      */
     private void startPort(){
-        banknoteSerialUtil = new LSerialUtil(LSerialUtil.SerialNameType.TYPE_TTYS_WK, 1, 9600, 8, 2, 'N', LSerialUtil.SerialType.TYPE_HEX, new LSerialUtil.OnSerialListener() {
+        banknoteSerialUtil = new LSerialUtil(LSerialUtil.SerialNameType.TYPE_TTYS, BanknoteConstant.BANKNOTE_SERIAL, 9600, 8, 1, 'E', LSerialUtil.SerialType.TYPE_HEX, new LSerialUtil.OnSerialListener() {
             @Override
             public void startError() {
                 Log.e("dawn", "异常：纸钞机串口启动错误");
@@ -93,27 +93,27 @@ public class BanknoteIctService extends Service {
         if("808F".equals(str)){
             //开机启动，发送02，接收指令
             banknoteSerialUtil.sendHexMsg(toByteArray("02"));//发送开机回复
-        }else if("8140".equals(str)){
+        }else if("818F40".equals(str) || "8140".equals(str)){
             //通道1接收纸钞，02接收，0F拒收
             banknoteSerialUtil.sendHexMsg(toByteArray("02"));//发送接收回复
             if(BanknoteIctFactory.getInstance(this).getListener() != null)
                 BanknoteIctFactory.getInstance(this).getListener().onReceiverMoney(1);
-        }else if("8141".equals(str)) {
+        }else if("818F41".equals(str) || "8141".equals(str)) {
             //通道2接收纸钞，02接收，0F拒收
             banknoteSerialUtil.sendHexMsg(toByteArray("02"));//发送接收回复
             if(BanknoteIctFactory.getInstance(this).getListener() != null)
                 BanknoteIctFactory.getInstance(this).getListener().onReceiverMoney(2);
-        }else if("8142".equals(str)) {
+        }else if("818F42".equals(str) || "8142".equals(str)) {
             //通道3接收纸钞，02接收，0F拒收
             banknoteSerialUtil.sendHexMsg(toByteArray("02"));//发送接收回复
             if (BanknoteIctFactory.getInstance(this).getListener() != null)
                 BanknoteIctFactory.getInstance(this).getListener().onReceiverMoney(3);
-        }else if("8143".equals(str)) {
+        }else if("818F43".equals(str) || "8143".equals(str)) {
             //通道4接收纸钞，02接收，0F拒收
             banknoteSerialUtil.sendHexMsg(toByteArray("02"));//发送接收回复
             if(BanknoteIctFactory.getInstance(this).getListener() != null)
                 BanknoteIctFactory.getInstance(this).getListener().onReceiverMoney(4);
-        }else if("8144".equals(str)) {
+        }else if("818F44".equals(str) || "8144".equals(str)) {
             //通道5接收纸钞，02接收，0F拒收
             banknoteSerialUtil.sendHexMsg(toByteArray("02"));//发送接收回复
             if(BanknoteIctFactory.getInstance(this).getListener() != null)
