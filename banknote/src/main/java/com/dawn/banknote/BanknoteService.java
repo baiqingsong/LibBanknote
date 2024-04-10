@@ -47,7 +47,7 @@ public class BanknoteService extends Service {
                     getConfigure();
                     break;
                 case h_set_configure:
-                    setConfigure();
+                    setConfigure(autoConfigure);
                     break;
                 case h_enable://设置使能状态
                     setEnable();
@@ -163,7 +163,8 @@ public class BanknoteService extends Service {
                             Log.i("dawn", "通道" + (i+1) + "面额：" + (denomination * multiple));
                             denominationAry[i] = denomination;
                         }
-                        setConfigure();//设置配置
+                        setConfigure(passageway);//设置配置
+                        autoConfigure = passageway;
                     }
 
                     break;
@@ -237,10 +238,10 @@ public class BanknoteService extends Service {
     /**
      * 发送设置配置指令
      */
-    private void setConfigure(){
+    private void setConfigure(int passageway){
         currentCommand = command.setConfigure;
         String sendData = "";
-        sendData = BanknoteSerialUtil.setConfigure();
+        sendData = BanknoteSerialUtil.setConfigure(passageway);
 
         Log.i("dawn", "set configure data : " + sendData);
         banknoteSerialUtil.sendHexMsg(toByteArray(sendData));//发送设置配置
@@ -333,11 +334,11 @@ public class BanknoteService extends Service {
                 case "stop_money_receiver"://停止纸币接收
                     setDisable();
                     break;
-                case "set_configure"://设置相关参数
-                    autoConfigure = intent.getIntExtra("configure", 0);
-                    autoMultiple = intent.getIntExtra("multiple", 0);
-                    setConfigure();
-                    break;
+//                case "set_configure"://设置相关参数
+//                    autoConfigure = intent.getIntExtra("configure", 0);
+//                    autoMultiple = intent.getIntExtra("multiple", 0);
+//                    setConfigure();
+//                    break;
             }
         }
     }
