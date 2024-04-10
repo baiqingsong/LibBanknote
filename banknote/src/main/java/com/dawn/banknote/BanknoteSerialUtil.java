@@ -48,8 +48,8 @@ class BanknoteSerialUtil {
      * 设置当前通道配置
      */
     public static String setConfigure(){
-        int[] data = {Integer.parseInt(currentCommand, 16), 0x03, 0x02, 0x0F, 0x00};
-        String sendStr = "7F" + currentCommand + "03020F00" + new CrcUtil().getCrc(data);
+        int[] data = {Integer.parseInt(currentCommand, 16), 0x03, 0x02, 0xFF, 0x00};
+        String sendStr = "7F" + currentCommand + "0302FF00" + new CrcUtil().getCrc(data);
         if("00".equals(currentCommand)){
             currentCommand = "80";
         }else{

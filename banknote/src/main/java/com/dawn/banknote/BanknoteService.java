@@ -118,7 +118,7 @@ public class BanknoteService extends Service {
 
             @Override
             public void getReceiverStr(String str) {
-                Log.i("dawn", "纸钞机串口接收数据：" + str);
+//                Log.i("dawn", "纸钞机串口接收数据：" + str);
                 resoluteBanknoteReceiverStr(str);
             }
         });
@@ -183,6 +183,7 @@ public class BanknoteService extends Service {
                 case status://状态获取
                     mHandler.removeMessages(h_status);
                     String statusStr = str.substring(8, 10);
+//                    Log.i("dawn", "status 8, 10 " + statusStr);
                     if("EF".equals(statusStr)){
 
                     }else if("EE".equals(statusStr)){
@@ -239,13 +240,7 @@ public class BanknoteService extends Service {
     private void setConfigure(){
         currentCommand = command.setConfigure;
         String sendData = "";
-        if(autoConfigure == 1){
-            sendData = BanknoteSerialUtil.setConfigure1();
-        }else if(autoConfigure == 2){
-            sendData = BanknoteSerialUtil.setConfigure2();
-        }else{
-            sendData = BanknoteSerialUtil.setConfigure();
-        }
+        sendData = BanknoteSerialUtil.setConfigure();
 
         Log.i("dawn", "set configure data : " + sendData);
         banknoteSerialUtil.sendHexMsg(toByteArray(sendData));//发送设置配置

@@ -14,6 +14,7 @@ import com.dawn.banknote.ict.BanknoteIctFactory;
 import com.dawn.banknote.ict.OnBanknoteIctListener;
 
 public class MainActivity extends AppCompatActivity {
+    private boolean isIct = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,35 +22,52 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 //        Intent banknoteIntent = new Intent(this, BanknoteService.class);
 //        startService(banknoteIntent);
-//        BanknoteFactory.getInstance(this).startService(0);
-//        BanknoteFactory.getInstance(this).setListener(new OnBanknoteListener() {
-//            @Override
-//            public void onReceiverMoney(int money) {
-//                Log.e("dawn", "接收金额：" + money);
-//            }
-//        });
+        if(isIct){
+            BanknoteIctFactory.getInstance(this).startService(4);
+            BanknoteIctFactory.getInstance(this).setListener(new OnBanknoteIctListener() {
+                @Override
+                public void onReceiverMoney(int moneyIndex) {
+                    Log.e("dawn", "接收金额：" + moneyIndex);
+                }
+            });
+        }else{
+            BanknoteFactory.getInstance(this).startService(1);
+            BanknoteFactory.getInstance(this).setListener(new OnBanknoteListener() {
+                @Override
+                public void onReceiverMoney(int money) {
+                    Log.e("dawn", "接收金额：" + money);
+                }
+            });
+        }
 
-        BanknoteIctFactory.getInstance(this).startService(4);
-        BanknoteIctFactory.getInstance(this).setListener(new OnBanknoteIctListener() {
-            @Override
-            public void onReceiverMoney(int moneyIndex) {
-                Log.e("dawn", "接收金额：" + moneyIndex);
-            }
-        });
+
+
 
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        BanknoteFactory.getInstance(this).stopMoneyReceiver();
+        if(isIct){
+            BanknoteIctFactory.getInstance(this).stopMoneyReceiver();
+        }else{
+            BanknoteFactory.getInstance(this).stopMoneyReceiver();
+        }
     }
 
     public void startReceiver(View view){
-        BanknoteIctFactory.getInstance(this).startMoneyReceiver();
+        if(isIct){
+            BanknoteIctFactory.getInstance(this).startMoneyReceiver();
+        }else{
+            BanknoteFactory.getInstance(this).startMoneyReceiver();
+        }
     }
 
     public void stopReceiver(View view){
-        BanknoteIctFactory.getInstance(this).stopMoneyReceiver();
+        if(isIct){
+            BanknoteIctFactory.getInstance(this).stopMoneyReceiver();
+        }else{
+            BanknoteFactory.getInstance(this).stopMoneyReceiver();
+        }
     }
 }
